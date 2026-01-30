@@ -1,0 +1,11 @@
+const int i0 = 0;
+const int i1 = 1;
+const int i2 = 2;
+const int i4 = 4;
+const double d0 = 0;
+const double d0d65 = 0.65;
+const double d0d7 = 0.7;
+const double d1 = 1.0;
+const double d8 = 8;
+const double d9 = 9.0;
+const String empty = '';

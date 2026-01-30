@@ -1,0 +1,1 @@
+enum PlanViewMode { list, grid }
