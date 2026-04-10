@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "760936887203",
+    "firebase_url": "https://todoon-cc167-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "todoon-cc167",
+    "storage_bucket": "todoon-cc167.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760936887203:android:fdcc7fe11a9b970cb7e016",
+        "android_client_info": {
+          "package_name": "com.phuoctan4141.todoon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760936887203-6ib7fckkcor0ekjq5gp67ptblpufo5aa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw8RtyM9-c5wk-kWU6yyFfegIYW2NIwkc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760936887203-6ib7fckkcor0ekjq5gp67ptblpufo5aa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-5975775955552049~7107164322"
+    }
+  ],
+  "configuration_version": "1"
+}

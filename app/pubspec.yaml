@@ -1,0 +1,70 @@
+name: todoon
+description: "A ToDoon Flutter project."
+
+publish_to: 'none'
+
+version: 2.0.2+22
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # state management
+  bloc: any
+  flutter_bloc: any
+  get_it: any
+  # language
+  easy_localization: any
+  # support dart core
+  intl: any
+  collection: any
+  dartz: any
+  equatable: any
+  path: any
+  internet_connection_checker: any
+  # database
+  hive_ce: any
+  hive_ce_flutter: any
+  firebase_core: any
+  firebase_auth: any
+  cloud_firestore: any
+  shared_preferences: any
+  # notificaiton
+  flutter_local_notifications: any
+  # images & icons
+  flutter_svg: any
+  cached_network_image: any
+  lottie: any
+  cupertino_icons: any
+  # support ui
+  gap: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: any
+  flutter_lints: any
+  flutter_launcher_icons: any
+  hive_ce_generator: any
+  rename: any
+  # test
+  mocktail: any
+  bloc_test: any
+
+flutter_launcher_icons:
+  android: "ic_launcher_foreground"
+  image_path: "assets/images/todoon_rounded_512.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  adaptive_icon_monochrome: "assets/images/todoon_monochrome_256.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/lotties/
+    - assets/translations/
