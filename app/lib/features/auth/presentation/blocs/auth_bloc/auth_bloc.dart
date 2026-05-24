@@ -4,16 +4,16 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:todoon/core/resources/consts_manager.dart';
 import 'package:todoon/core/utils/failure.dart';
-import 'package:todoon/features/common/app_state/app_state.dart';
+import 'package:todoon/common/app_state/app_state.dart';
 import 'package:todoon/generated/locale_keys.g.dart';
 
-// import '../../../domain/usecases/change_pass_usecase.dart';
+import '../../../domain/usecases/change_pass_usecase.dart';
 import '../../../domain/usecases/get_current_user_usecase.dart';
 import '../../../domain/usecases/reset_pass_usecase.dart';
 import '../../../domain/usecases/sign_in_usecase.dart';
 import '../../../domain/usecases/sign_out_usecase.dart';
 import '../../../domain/usecases/sign_up_usecase.dart';
-// import '../../../domain/usecases/update_profile_usecase.dart';
+import '../../../domain/usecases/update_profile_usecase.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -24,8 +24,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignUpUseCase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
   final ResetPassUseCase _resetPassUseCase;
-  // final ChangePassUseCase _changePassUseCase;
-  // final UpdateProfileUseCase _updateProfileUseCase;
+  final ChangePassUseCase _changePassUseCase;
+  final UpdateProfileUseCase _updateProfileUseCase;
 
   AuthBloc({
     required GetCurrentUserUseCase getCurrentUserUseCase,
@@ -33,23 +33,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required SignUpUseCase signUpUseCase,
     required SignOutUseCase signOutUseCase,
     required ResetPassUseCase resetPassUseCase,
-    // required ChangePassUseCase changePassUseCase,
-    // required UpdateProfileUseCase updateProfileUseCase,
+    required ChangePassUseCase changePassUseCase,
+    required UpdateProfileUseCase updateProfileUseCase,
   }) : _getCurrentUserUseCase = getCurrentUserUseCase,
        _signInUseCase = signInUseCase,
        _signUpUseCase = signUpUseCase,
        _signOutUseCase = signOutUseCase,
        _resetPassUseCase = resetPassUseCase,
-       //  _changePassUseCase = changePassUseCase,
-       //  _updateProfileUseCase = updateProfileUseCase,
+       _changePassUseCase = changePassUseCase,
+       _updateProfileUseCase = updateProfileUseCase,
        super(AuthState()) {
     on<AuthCheckStatus>(_onCheckStatus);
     on<AuthSignInEvent>(_onSignIn);
     on<AuthSignUpEvent>(_onSignUp);
     on<AuthSignOutEvent>(_onSignOut);
     on<AuthResetPassEvent>(_onResetPass);
-    // on<AuthChangePassEvent>(_onChangePass);
-    // on<AuthUpdateProfileEvent>(_onUpdateProfile);
+    on<AuthChangePassEvent>(_onChangePass);
+    on<AuthUpdateProfileEvent>(_onUpdateProfile);
     on<AuthRefreshEvent>(_onRefresh);
     on<AuthNavigateToSignUpEvent>(_onNavigateToSignUp);
     on<AuthNavigateToForgotEvent>(_onNavigateToForgot);
@@ -138,46 +138,46 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  // /// === _onChangePass ===
-  // FutureOr<void> _onChangePass(
-  //   AuthChangePassEvent event,
-  //   Emitter<AuthState> emit,
-  // ) async {
-  //   emit(state.processing(status: .changingPass));
+  /// === _onChangePass ===
+  FutureOr<void> _onChangePass(
+    AuthChangePassEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.processing(status: .changingPass));
 
-  //   final result = await _changePassUseCase.execute(
-  //     ChangePassParams(
-  //       oldPassword: event.oldPassword,
-  //       newPassword: event.newPassword,
-  //     ),
-  //   );
+    final result = await _changePassUseCase.execute(
+      ChangePassParams(
+        oldPassword: event.oldPassword,
+        newPassword: event.newPassword,
+      ),
+    );
 
-  //   result.fold(
-  //     (f) => emit(state.error(failure: f)),
-  //     (_) => emit(
-  //       state.success(status: .changedPass, message: LocaleKeys.auth_upS),
-  //     ),
-  //   );
-  // }
+    result.fold(
+      (f) => emit(state.error(failure: f)),
+      (_) => emit(
+        state.success(status: .changedPass, message: LocaleKeys.auth_upS),
+      ),
+    );
+  }
 
-  // /// === _onUpdateProfile ===
-  // FutureOr<void> _onUpdateProfile(
-  //   AuthUpdateProfileEvent event,
-  //   Emitter<AuthState> emit,
-  // ) async {
-  //   emit(state.processing(status: .updatingProfile));
+  /// === _onUpdateProfile ===
+  FutureOr<void> _onUpdateProfile(
+    AuthUpdateProfileEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.processing(status: .updatingProfile));
 
-  //   final result = await _updateProfileUseCase.execute(
-  //     UpdateProfileParams(displayName: event.displayName),
-  //   );
+    final result = await _updateProfileUseCase.execute(
+      UpdateProfileParams(displayName: event.displayName),
+    );
 
-  //   result.fold(
-  //     (f) => emit(state.error(failure: f)),
-  //     (_) => emit(
-  //       state.success(status: .updatedProfile, message: LocaleKeys.auth_upS),
-  //     ),
-  //   );
-  // }
+    result.fold(
+      (f) => emit(state.error(failure: f)),
+      (_) => emit(
+        state.success(status: .updatedProfile, message: LocaleKeys.auth_upS),
+      ),
+    );
+  }
 
   /// === _onRefresh ===
   FutureOr<void> _onRefresh(

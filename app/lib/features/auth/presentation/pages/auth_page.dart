@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoon/core/resources/consts_manager.dart';
 import 'package:todoon/core/resources/strings_manager.dart';
 import 'package:todoon/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:todoon/features/common/app_state/app_state_builder.dart';
-import 'package:todoon/features/common/widgets/bgr_image.dart';
+import 'package:todoon/common/app_state/app_state_builder.dart';
+import 'package:todoon/common/widgets/bgr_image.dart';
+import 'package:todoon/routes/route_names.dart';
 import 'package:todoon/service_locator.dart';
 
 import '../views/forgot_view.dart';
@@ -49,15 +50,21 @@ class AuthPage extends StatelessWidget {
     BlocProvider.of<AuthBloc>(context).add(AuthNavigateToForgotEvent());
   }
 
+  /// === _navigateToTermsAndPrivacy ===
+  void _navigateToTermsAndPrivacy(BuildContext context) {
+    navigator.pushNamed(RouteNames.termsAndPrivacy);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.transparent,
       body: BgrImage(
+        isFill: true,
         child: BlocProvider(
           lazy: false,
-          create: (_) => sl.get<AuthBloc>()..add(AuthCheckStatus()),
+          create: (context) => sl.get<AuthBloc>()..add(AuthCheckStatus()),
           child: AppStateBuilder<AuthBloc, AuthState>(
             listenWhen: (previous, current) =>
                 previous.status != current.status ||
@@ -69,6 +76,16 @@ class AuthPage extends StatelessWidget {
                   message: 'AuthPage listener: ${state.flow} ${state.status}',
                 ),
               );
+
+              if (state.flow == .error) {
+                debugPrint(
+                  AppStrings.error(
+                    tag: 'AuthPage',
+                    message:
+                        'AuthPage listener: ${state.error} ${state.message}',
+                  ),
+                );
+              }
 
               if (state.flow == .success || state.flow == .error) {
                 BlocProvider.of<AuthBloc>(context).add(AuthRefreshEvent());
@@ -105,12 +122,14 @@ class AuthPage extends StatelessWidget {
                           password.orEmpty(),
                         ),
                     onSignIn: () => _navigateToLogin(context),
+                    onTermsAndPrivacy: () =>
+                        _navigateToTermsAndPrivacy(context),
                   ),
                   .forgotPassword => ForgotView(
                     key: ValueKey('forgot'),
                     onforgot: (email) =>
                         _handleForgot(context, email.orEmpty()),
-                    onBack: () => _navigateToLogin(context),
+                    onSignIn: () => _navigateToLogin(context),
                   ),
                 },
               );

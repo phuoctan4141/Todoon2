@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todoon/core/utils/error_handler.dart';
 import 'package:todoon/core/utils/failure.dart';
 import 'package:todoon/features/auth/domain/repositories/auth_repository.dart';
-import 'package:todoon/features/common/base/base_usecase.dart';
+import 'package:todoon/common/base/base_usecase.dart';
 
 class SignInParams {
   final String email;

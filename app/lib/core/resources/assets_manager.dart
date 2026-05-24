@@ -3,6 +3,7 @@
 const String ICON_PATH = "assets/icons";
 const String IMAGE_PATH = "assets/images";
 const String LOTTIE_PATH = "assets/lotties";
+const String TERMS_AND_PRIVACY_PATH = "assets/termsaprivacy";
 
 class IconAssets {
   IconAssets._();
@@ -37,4 +38,13 @@ class LottieAssets {
   static const String do_work = "$LOTTIE_PATH/do_work.json";
   static const String no_task = "$LOTTIE_PATH/no_task.json";
   static const String today = "$LOTTIE_PATH/today.json";
+}
+
+class TermsAndPrivacyAssets {
+  TermsAndPrivacyAssets._();
+
+  static const String privacyPolicy =
+      "$TERMS_AND_PRIVACY_PATH/PRIVACY_POLICY.md";
+  static const String termsOfService =
+      "$TERMS_AND_PRIVACY_PATH/TERMS_OF_SERVICE.md";
 }

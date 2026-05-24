@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:todoon/features/auth/presentation/pages/auth_page.dart';
-import 'package:todoon/features/auth/presentation/pages/profile_page.dart';
-import 'package:todoon/features/common/app_state/state_widgets.dart';
+import 'package:todoon/common/app_state/state_widgets.dart';
 import 'package:todoon/features/home/presentation/pages/home_page.dart';
 import 'package:todoon/features/settings/presentation/pages/settings_page.dart';
 import 'package:todoon/features/splash/presentation/pages/splash_page.dart';
+import 'package:todoon/features/termsaprivacy/presentation/pages/termsaprivacy_page.dart';
 
 import 'route_names.dart';
 
@@ -18,14 +18,14 @@ class AppRouter {
       case RouteNames.auth:
         return _slideRoute(const AuthPage());
 
-      case RouteNames.profile:
-        return _slideRoute(const ProfilePage());
-
       case RouteNames.home:
         return _slideRoute(const HomePage());
 
       case RouteNames.settings:
         return _slideRoute(const SettingsPage());
+
+      case RouteNames.termsAndPrivacy:
+        return _slideRoute(const TermsAndPrivacyPage());
 
       default:
         return MaterialPageRoute(

@@ -4,8 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:todoon/core/resources/icons_manager.dart';
 import 'package:todoon/core/resources/styles_manager.dart';
 import 'package:todoon/core/resources/values_manager.dart';
-import 'package:todoon/features/common/widgets/custom_text_form_field.dart';
-import 'package:todoon/features/common/widgets/glass/glass_container.dart';
+import 'package:todoon/common/widgets/custom_close_button.dart';
+import 'package:todoon/common/widgets/custom_text_form_field.dart';
+import 'package:todoon/common/widgets/glass/glass_container.dart';
 import 'package:todoon/generated/locale_keys.g.dart';
 
 class ProfileView extends StatefulWidget {
@@ -58,15 +59,23 @@ class _ProfileViewState extends State<ProfileView> {
         bottomLeft: Radius.zero,
         bottomRight: Radius.zero,
       ),
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * AppSize.s0d65,
-      ),
-      padding: const EdgeInsets.all(AppPadding.p12),
+      padding: const EdgeInsets.all(AppPadding.p16),
       child: Column(
         mainAxisSize: .min,
-        mainAxisAlignment: .center,
         crossAxisAlignment: .center,
         children: [
+          Row(
+            mainAxisAlignment: .center,
+            children: [
+              Text(
+                LocaleKeys.auth_updateProfile.tr(),
+                style: AppStyles.medium(fontSize: AppFontSize.s18),
+              ),
+              const Spacer(),
+              const CustomCloseButton(),
+            ],
+          ),
+          const Gap(AppSize.s24),
           // Display Name
           CustomTextFormField(
             controller: _displayNameController,
@@ -75,7 +84,7 @@ class _ProfileViewState extends State<ProfileView> {
             label: LocaleKeys.auth_displayName.tr(),
             prefixIcon: Icon(AppIcons.person),
           ),
-          const Gap(AppSize.s8),
+          const Gap(AppSize.s16),
           // save button
           SizedBox(
             width: double.infinity,

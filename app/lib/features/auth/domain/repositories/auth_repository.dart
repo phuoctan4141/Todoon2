@@ -7,6 +7,7 @@ import 'package:todoon/core/utils/failure.dart';
 abstract class AuthRepository {
   Stream<User?> get authStateChanges;
   User? get currentUser;
+  Stream<User?> get userChanges;
 
   Future<Either<Failure, User>> signIn({
     required String email,

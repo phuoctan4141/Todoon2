@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:todoon/features/app/presentation/app.dart';
+import 'package:todoon/features/app/app.dart';
 import 'package:todoon/core/resources/theme_manager.dart';
 import 'package:todoon/generated/locale_keys.g.dart';
 

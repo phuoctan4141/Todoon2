@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:todoon/core/resources/consts_manager.dart';
 import 'package:todoon/core/services/network/network_info.dart';
 import 'package:todoon/core/utils/error_handler.dart';
 import 'package:todoon/core/utils/failure.dart';
@@ -11,9 +12,6 @@ import 'package:todoon/features/auth/domain/repositories/auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
-
-  // Timeout duration for network operations
-  static const Duration _timeout = Duration(seconds: 30);
 
   AuthRepositoryImpl({
     required AuthRemoteDataSource remoteDataSource,
@@ -28,6 +26,9 @@ class AuthRepositoryImpl implements AuthRepository {
   User? get currentUser => _remoteDataSource.currentUser;
 
   @override
+  Stream<User?> get userChanges => _remoteDataSource.userChanges;
+
+  @override
   Future<Either<Failure, User>> signIn({
     required String email,
     required String password,
@@ -39,7 +40,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final result = await _remoteDataSource
           .signIn(email: email, password: password)
-          .timeout(_timeout);
+          .timeout(kRequestTimeout);
 
       return result.fold((f) => Left(f), (userCredential) {
         return Right(userCredential.user!);
@@ -63,7 +64,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final result = await _remoteDataSource
           .signUp(email: email, password: password)
-          .timeout(_timeout);
+          .timeout(kRequestTimeout);
 
       return result.fold((f) => Left(f), (userCredential) {
         return Right(userCredential.user!);
@@ -94,7 +95,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       return await _remoteDataSource
           .sendPasswordResetEmail(email)
-          .timeout(_timeout);
+          .timeout(kRequestTimeout);
     } on TimeoutException {
       return Left(TimeoutFailure());
     } on ErrorHandler catch (e) {
@@ -111,7 +112,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       return await _remoteDataSource
           .updateProfile(displayName: displayName)
-          .timeout(_timeout);
+          .timeout(kRequestTimeout);
     } on TimeoutException {
       return Left(TimeoutFailure());
     } on ErrorHandler catch (e) {
@@ -131,7 +132,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final result = await _remoteDataSource
           .changePassword(oldPassword: oldPassword, newPassword: newPassword)
-          .timeout(_timeout);
+          .timeout(kRequestTimeout);
       return result.fold((f) => Left(f), (_) {
         return const Right(unit);
       });

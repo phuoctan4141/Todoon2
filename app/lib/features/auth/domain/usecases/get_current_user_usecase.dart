@@ -7,7 +7,6 @@ class GetCurrentUserUseCase {
   GetCurrentUserUseCase({required AuthRepository repository})
     : _repository = repository;
 
-  Future<User?> call() async {
-    return Future.delayed(Durations.short3, () => _repository.currentUser);
-  }
+  Future<User?> call() =>
+      Future.delayed(Durations.short3, () => _repository.currentUser);
 }

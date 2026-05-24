@@ -20,10 +20,12 @@ dependencies:
   easy_localization: any
   # support dart core
   intl: any
+  uuid: any
   collection: any
   dartz: any
   equatable: any
   path: any
+  path_provider: any
   internet_connection_checker: any
   # database
   hive_ce: any
@@ -41,6 +43,8 @@ dependencies:
   cupertino_icons: any
   # support ui
   gap: any
+  flutter_markdown_plus: any
+
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +69,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/icons/delete/
     - assets/images/
     - assets/lotties/
     - assets/translations/
+    - assets/termsaprivacy/

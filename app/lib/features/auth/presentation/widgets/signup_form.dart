@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:todoon/core/resources/styles_manager.dart';
 import 'package:todoon/core/resources/values_manager.dart';
-import 'package:todoon/features/common/widgets/custom_text_form_field.dart';
+import 'package:todoon/common/widgets/custom_text_form_field.dart';
 import 'package:todoon/generated/locale_keys.g.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -12,6 +12,7 @@ class SignUpForm extends StatefulWidget {
   final TextEditingController conPassController;
   final VoidCallback onSignUp;
   final VoidCallback onSignIn;
+  final VoidCallback onTermsAndPrivacy;
 
   const SignUpForm({
     super.key,
@@ -20,6 +21,7 @@ class SignUpForm extends StatefulWidget {
     required this.conPassController,
     required this.onSignUp,
     required this.onSignIn,
+    required this.onTermsAndPrivacy,
   });
 
   @override
@@ -64,6 +66,8 @@ class _SignUpFormState extends State<SignUpForm> {
 
   void _handleSubmit() {
     if (_formKey.currentState?.validate() ?? false) {
+      _passObscureController.hide();
+      _conPassObscureController.hide();
       Focus.maybeOf(context)?.unfocus();
       widget.onSignUp.call();
     }
@@ -184,6 +188,36 @@ class _SignUpFormState extends State<SignUpForm> {
                       ),
                     ),
                   ],
+                ),
+                const Gap(AppSize.s4),
+
+                /// Terms and Privacy
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        LocaleKeys.auth_byCreatingAcc.tr(),
+                        style: AppStyles.medium(
+                          fontSize: AppFontSize.s14,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                      const Gap(AppSize.s4),
+                      InkWell(
+                        onTap: widget.onTermsAndPrivacy,
+                        borderRadius: BorderRadius.circular(AppRadius.r16),
+                        child: Text(
+                          LocaleKeys.auth_termsAndPrivacy.tr(),
+                          style: AppStyles.bold(
+                            color: colorScheme.onSecondaryContainer,
+                            fontSize: AppFontSize.s16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
                 const Gap(AppSize.s16),

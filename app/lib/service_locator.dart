@@ -10,6 +10,7 @@ import 'package:todoon/features/auth/domain/repositories/auth_repository.dart';
 import 'package:todoon/features/auth/domain/usecases/auth_state_changes_usecase.dart';
 import 'package:todoon/features/auth/domain/usecases/change_pass_usecase.dart';
 import 'package:todoon/features/auth/domain/usecases/get_current_user_usecase.dart';
+import 'package:todoon/features/auth/domain/usecases/get_user_usecase.dart';
 import 'package:todoon/features/auth/domain/usecases/reset_pass_usecase.dart';
 import 'package:todoon/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:todoon/features/auth/domain/usecases/sign_out_usecase.dart';
@@ -18,11 +19,13 @@ import 'package:todoon/features/auth/domain/usecases/update_profile_usecase.dart
 import 'package:todoon/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:todoon/features/auth/presentation/blocs/auth_cubit/auth_cubit.dart';
 import 'package:todoon/features/auth/presentation/blocs/profile_cubit/profile_cubit.dart';
+import 'package:todoon/features/termsaprivacy/domain/usecases/get_termsaprivacy_usecase.dart';
+import 'package:todoon/features/termsaprivacy/presentation/cubit/termsaprivacy_cubit.dart';
 
 final sl = GetIt.instance;
 final NavigationService navigator = NavigationService.instance;
 
-Future<void> initAppModule() async {
+void initAppModule() {
   /// === Core ===
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(InternetConnectionChecker.instance),
@@ -30,7 +33,7 @@ Future<void> initAppModule() async {
 
   /// === Firebase ===
   sl.registerLazySingleton<FirebaseAuthService>(
-    () => FirebaseAuthService()..initEmulator(emulatorHost: '192.168.1.3'),
+    () => FirebaseAuthService()..initEmulator(),
   );
 
   /// == LocalDatasource ===
@@ -57,6 +60,9 @@ void initAuthModule() {
   sl.registerFactory<GetCurrentUserUseCase>(
     () => GetCurrentUserUseCase(repository: sl.get()),
   );
+  sl.registerFactory<GetUserUseCase>(
+    () => GetUserUseCase(repository: sl.get()),
+  );
   sl.registerFactory<ResetPassUseCase>(
     () => ResetPassUseCase(repository: sl.get()),
   );
@@ -69,6 +75,10 @@ void initAuthModule() {
     () => UpdateProfileUseCase(repository: sl.get()),
   );
 
+  sl.registerFactory<GetTermsAndPrivacyUseCase>(
+    () => GetTermsAndPrivacyUseCase(),
+  );
+
   /// === Blocs ===
   sl.registerFactory<AuthBloc>(
     () => AuthBloc(
@@ -77,18 +87,20 @@ void initAuthModule() {
       signUpUseCase: sl.get(),
       signOutUseCase: sl.get(),
       resetPassUseCase: sl.get(),
-      // changePassUseCase: sl.get(),
-      // updateProfileUseCase: sl.get(),
+      changePassUseCase: sl.get(),
+      updateProfileUseCase: sl.get(),
     ),
   );
 
   sl.registerFactory<AuthCubit>(() => AuthCubit(authStateChanges: sl.get()));
 
   sl.registerFactory<ProfileCubit>(
-    () => ProfileCubit(
-      getCurrentUserUseCase: sl.get(),
-      updateProfileUseCase: sl.get(),
-    ),
+    () =>
+        ProfileCubit(getUserUseCase: sl.get(), updateProfileUseCase: sl.get()),
+  );
+
+  sl.registerFactory<TermsAndPrivacyCubit>(
+    () => TermsAndPrivacyCubit(getTermsAndPrivacyUseCase: sl.get()),
   );
 }
 

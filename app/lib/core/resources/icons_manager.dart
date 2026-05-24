@@ -4,6 +4,8 @@ class AppIcons {
   AppIcons._();
 
   static const IconData back = Icons.arrow_back_rounded;
+  static const IconData next = Icons.arrow_right_rounded;
+  static const IconData close = Icons.close_rounded;
 
   static const IconData email = Icons.email_rounded;
   static const IconData password = Icons.password_rounded;
@@ -34,4 +36,7 @@ class AppIcons {
 
   static const IconData calendar_month_outlined = Icons.calendar_month_outlined;
   static const IconData calendar_month_rounded = Icons.calendar_month_rounded;
+
+  static const IconData settings_outlined = Icons.settings_outlined;
+  static const IconData settings_rounded = Icons.settings_rounded;
 }

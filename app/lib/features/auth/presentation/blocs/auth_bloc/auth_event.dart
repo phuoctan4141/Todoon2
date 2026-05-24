@@ -40,27 +40,27 @@ final class AuthResetPassEvent extends AuthEvent {
   List<Object?> get props => [email];
 }
 
-// final class AuthChangePassEvent extends AuthEvent {
-//   final String oldPassword;
-//   final String newPassword;
+final class AuthChangePassEvent extends AuthEvent {
+  final String oldPassword;
+  final String newPassword;
 
-//   const AuthChangePassEvent({
-//     required this.oldPassword,
-//     required this.newPassword,
-//   });
+  const AuthChangePassEvent({
+    required this.oldPassword,
+    required this.newPassword,
+  });
 
-//   @override
-//   List<Object?> get props => [oldPassword, newPassword];
-// }
+  @override
+  List<Object?> get props => [oldPassword, newPassword];
+}
 
-// final class AuthUpdateProfileEvent extends AuthEvent {
-//   final String displayName;
+final class AuthUpdateProfileEvent extends AuthEvent {
+  final String displayName;
 
-//   const AuthUpdateProfileEvent({required this.displayName});
+  const AuthUpdateProfileEvent({required this.displayName});
 
-//   @override
-//   List<Object?> get props => [displayName];
-// }
+  @override
+  List<Object?> get props => [displayName];
+}
 
 final class AuthRefreshEvent extends AuthEvent {}
 

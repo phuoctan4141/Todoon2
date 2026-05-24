@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 
 import 'package:todoon/core/resources/styles_manager.dart';
 import 'package:todoon/core/resources/values_manager.dart';
-import 'package:todoon/features/common/widgets/custom_text_form_field.dart';
+import 'package:todoon/common/widgets/custom_text_form_field.dart';
 import 'package:todoon/generated/locale_keys.g.dart';
 
 class LoginForm extends StatefulWidget {
@@ -62,6 +62,7 @@ class _LoginFormState extends State<LoginForm> {
 
   void _handleSignIn() {
     if (_formKey.currentState?.validate() ?? false) {
+      _obscureController.hide();
       Focus.maybeOf(context)?.unfocus();
       widget.onSignIn.call();
     }

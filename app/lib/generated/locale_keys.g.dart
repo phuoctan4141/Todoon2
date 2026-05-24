@@ -70,6 +70,7 @@ abstract class  LocaleKeys {
   static const action_deleteTodoList = 'action.deleteTodoList';
   static const action_deleteTodo = 'action.deleteTodo';
   static const action_deleteTag = 'action.deleteTag';
+  static const action_deletePlan = 'action.deletePlan';
   static const action_editNote = 'action.editNote';
   static const action_editReminder = 'action.editReminder';
   static const action_editTodo = 'action.editTodo';
@@ -98,6 +99,9 @@ abstract class  LocaleKeys {
   static const auth_notNullPass = 'auth.notNullPass';
   static const auth_outS = 'auth.outS';
   static const auth_pass = 'auth.pass';
+  static const auth_newPass = 'auth.newPass';
+  static const auth_oldPass = 'auth.oldPass';
+  static const auth_conNewPass = 'auth.conNewPass';
   static const auth_passNotMatch = 'auth.passNotMatch';
   static const auth_register = 'auth.register';
   static const auth_reset = 'auth.reset';
@@ -118,7 +122,13 @@ abstract class  LocaleKeys {
   static const auth_updateProfileSub = 'auth.updateProfileSub';
   static const auth_changePasswordSub = 'auth.changePasswordSub';
   static const auth_forgetSub = 'auth.forgetSub';
+  static const auth_byCreatingAcc = 'auth.byCreatingAcc';
+  static const auth_termsAndPrivacy = 'auth.termsAndPrivacy';
+  static const auth_terms = 'auth.terms';
+  static const auth_privacy = 'auth.privacy';
+  static const auth_rememberPass = 'auth.rememberPass';
   static const auth = 'auth';
+  static const dialog_deletePlanMess = 'dialog.deletePlanMess';
   static const dialog_deleteNoteMess = 'dialog.deleteNoteMess';
   static const dialog_deleteTodoListMess = 'dialog.deleteTodoListMess';
   static const dialog_deleteTodoMess = 'dialog.deleteTodoMess';
@@ -172,6 +182,7 @@ abstract class  LocaleKeys {
   static const title_dueDate = 'title.dueDate';
   static const title_more = 'title.more';
   static const title_Theme = 'title.Theme';
+  static const title_Language = 'title.Language';
   static const title = 'title';
   static const repeat_none = 'repeat.none';
   static const repeat_daily = 'repeat.daily';

@@ -8,7 +8,7 @@ import 'package:todoon/core/resources/assets_manager.dart';
 import 'package:todoon/core/resources/icons_manager.dart';
 import 'package:todoon/core/resources/styles_manager.dart';
 import 'package:todoon/core/resources/values_manager.dart';
-import 'package:todoon/features/common/widgets/choose_tile.dart';
+import 'package:todoon/common/widgets/choose_tile.dart';
 import 'package:todoon/generated/locale_keys.g.dart';
 
 class ProfileContainer extends StatefulWidget {
@@ -49,6 +49,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
       clipBehavior: Clip.antiAlias,
       elevation: AppElevation.e3,
       color: _getContainerColor(context),
+      shadowColor: _getContainerColor(context),
       child: BackdropFilter(
         filter: ImageFilter.blur(
           sigmaX: _getBlurValue(context),

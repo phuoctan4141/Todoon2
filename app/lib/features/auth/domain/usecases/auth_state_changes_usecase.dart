@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todoon/features/auth/domain/repositories/auth_repository.dart';
 
@@ -9,7 +7,5 @@ class AuthStateChangesUseCase {
   AuthStateChangesUseCase({required AuthRepository repository})
     : _repository = repository;
 
-  Stream<User?> call() {
-    return _repository.authStateChanges;
-  }
+  Stream<User?> call() => _repository.authStateChanges;
 }

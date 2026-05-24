@@ -8,17 +8,19 @@ class FirebaseAuthService {
 
   Future<void> initEmulator({
     bool useEmulator = true,
-    String emulatorHost = '192.168.1.5',
+    String emulatorHost = '192.168.1.11',
     int emulatorPort = 9099,
   }) async {
     if (useEmulator) {
-      await FirebaseAuth.instance.useAuthEmulator(emulatorHost, emulatorPort);
+      await _auth.useAuthEmulator(emulatorHost, emulatorPort);
     }
   }
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   User? get currentUser => _auth.currentUser;
+
+  Stream<User?> get userChanges => _auth.userChanges();
 
   /// SignIn with email, password
   Future<Either<Failure, UserCredential>> signIn({

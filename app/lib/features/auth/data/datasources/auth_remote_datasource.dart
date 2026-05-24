@@ -6,6 +6,7 @@ import 'package:todoon/core/utils/failure.dart';
 abstract class AuthRemoteDataSource {
   Stream<User?> get authStateChanges;
   User? get currentUser;
+  Stream<User?> get userChanges;
 
   Future<Either<Failure, UserCredential>> signIn({
     required String email,
@@ -40,6 +41,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   User? get currentUser => _authService.currentUser;
+
+  @override
+  Stream<User?> get userChanges => _authService.userChanges;
 
   @override
   Future<Either<Failure, UserCredential>> signIn({

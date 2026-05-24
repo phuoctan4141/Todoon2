@@ -3,6 +3,8 @@ class AppStrings {
 
   static const String appName = "ToDoon";
   static const String homeUid = "home";
+  static const String dailyFocusUid = "daily_focus";
+  static const String dailyFocusTitle = "Daily Focus";
 
   static String debug({required String tag, required String message}) =>
       "[📋Todoon] [DEBUG] [$tag] $message";
